@@ -45,13 +45,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
       - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          channelId: live
-          projectId: gestaoops-7047e
+        run: firebase deploy --only hosting --project gestaoops-7047e
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
   preview:
     name: 🔍 Preview (PR)
@@ -73,9 +73,10 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy Preview to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          projectId: gestaoops-7047e
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy Preview
+        run: firebase hosting:channel:deploy pr-${{ github.event.number }} --project gestaoops-7047e --expires 7d
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
