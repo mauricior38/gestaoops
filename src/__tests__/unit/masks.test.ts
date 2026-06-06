@@ -59,7 +59,8 @@ describe('maskCurrencyInput', () => {
   });
 
   it('strips non-digits before formatting', () => {
-    expect(maskCurrencyInput('R$ 1.500,50')).toBe('15.005,00');
+    // 'R$ 1.500,50' → digits '150050' → 1500.50 → '1.500,50'
+    expect(maskCurrencyInput('R$ 1.500,50')).toBe('1.500,50');
   });
 
   it('formats single digit "5" → "0,05"', () => {

@@ -9,8 +9,8 @@ import {
 } from '@/types/service';
 
 describe('DEFAULT_SERVICE_CATALOG', () => {
-  it('has 21 services', () => {
-    expect(DEFAULT_SERVICE_CATALOG).toHaveLength(21);
+  it('has 22 services', () => {
+    expect(DEFAULT_SERVICE_CATALOG).toHaveLength(22);
   });
 
   it('all entries have required fields', () => {
